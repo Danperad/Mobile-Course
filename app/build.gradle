@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.danperad.empty'
+    namespace 'com.danperad.tictactoe'
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.danperad.empty"
+        applicationId "com.danperad.tictactoe"
         minSdk 25
         targetSdk 32
         versionCode 1

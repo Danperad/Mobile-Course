@@ -1,6 +1,12 @@
 <resources>
-    <string name="app_name">My Application</string>
-    <string name="invalid_number_msg">Ошибка ввода</string>
-    <string name="placeholder">Введите число</string>
-    <string name="backspace_description">Описание</string>
+    <string name="app_name">Крестики-нолики</string>
+    <string name="app_header">Крестики-нолики</string>
+    <string name="menu_helper">Показать меню</string>
+    <string name="menu_item_new_game">Новая игра</string>
+    <string name="menu_item_change_theme">Сменить тему</string>
+    <string name="menu_item_exit">Выход</string>
+    <string name="game_info_nothing">Ничья!</string>
+    <string name="game_info_cross_win">Победили крестики!</string>
+    <string name="game_info_zero_win">Победили нолики!</string>
+
 </resources>
