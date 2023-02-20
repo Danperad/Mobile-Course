@@ -31,15 +31,19 @@ class Game(private val configuration: GameConfiguration) {
     fun zeroStep(iRow: Int, iCol: Int) {
         setZero(iRow, iCol)
         updateState()
-        setComputerCell()
-        updateState()
+        if (winnerCheckingResult == null){
+            setComputerCell()
+            updateState()
+        }
     }
 
     fun crossStep(iRow: Int, iCol: Int) {
         setCross(iRow, iCol)
         updateState()
-        setComputerCell()
-        updateState()
+        if (winnerCheckingResult == null){
+            setComputerCell()
+            updateState()
+        }
     }
 
     private fun setComputerCell() {
