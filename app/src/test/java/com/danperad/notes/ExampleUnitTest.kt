@@ -1,4 +1,4 @@
-package com.danperad.empty
+package com.danperad.notes
 
 import org.junit.Test
 

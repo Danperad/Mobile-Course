@@ -1,6 +1,21 @@
 <resources>
-    <string name="app_name">My Application</string>
-    <string name="invalid_number_msg">Ошибка ввода</string>
-    <string name="placeholder">Введите число</string>
-    <string name="backspace_description">Описание</string>
+    <string name="app_name">Заметки</string>
+    <string name="menu_helper">Меню</string>
+    <string name="menu_item_about">О программе</string>
+    <string name="menu_item_exit">Выход</string>
+
+    <string name="main_remove_cards">Удалить выбранные</string>
+    <string name="main_deselect_cards">Убрать выделение</string>
+
+    <string name="create_note_help">Создать</string>
+
+    <string name="about_developer">Разработчик программы: Кокорин Е.Д.</string>
+    <string name="about_copyright">Все права защищены © 2023 г.</string>
+    <string name="about_topbar_title">О приложении</string>
+
+    <string name="note_topbar_title">Заметка</string>
+    <string name="note_save">Сохранить</string>
+    <string name="note_close">Закрыть</string>
+    <string name="note_title_placeholder">Название</string>
+    <string name="note_body_placeholder">Описание</string>
 </resources>
