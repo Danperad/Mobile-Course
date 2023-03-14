@@ -28,10 +28,11 @@ import com.danperad.notes.ui.NotesViewModel
 import com.danperad.notes.ui.theme.NotesTheme
 
 class MainActivity : ComponentActivity() {
-    private val notesViewModel: NotesViewModel = NotesViewModel(LocalContext.current)
+    private lateinit var notesViewModel: NotesViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            notesViewModel = NotesViewModel(LocalContext.current, rememberCoroutineScope())
             NotesTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
                     MainView(notesViewModel)
@@ -158,6 +159,6 @@ fun CreateButton(onNavigateToCreate: () -> Unit) {
 @Composable
 fun DefaultPreview() {
     NotesTheme {
-        MainView(NotesViewModel(LocalContext.current))
+        MainView(NotesViewModel(LocalContext.current, rememberCoroutineScope()))
     }
 }

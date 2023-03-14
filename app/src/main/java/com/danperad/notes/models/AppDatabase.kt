@@ -8,20 +8,20 @@ import androidx.room.TypeConverters
 
 @Database(entities = [Note::class], version = 1)
 @TypeConverters(Converters::class)
-abstract class AppDataBase : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
     abstract fun notesDao(): NotesDao
 
     companion object {
         @Volatile
-        private var INSTANCE: AppDataBase? = null
-        fun getDataBase(context: Context): AppDataBase {
+        private var INSTANCE: AppDatabase? = null
+        fun getDataBase(context: Context): AppDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
             }
             synchronized(this) {
                 val instance =
-                    Room.databaseBuilder(context.applicationContext, AppDataBase::class.java, "notes").build()
+                    Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "notes").allowMainThreadQueries().build()
                 INSTANCE = instance
                 return instance
             }

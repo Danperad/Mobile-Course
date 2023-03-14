@@ -1,9 +1,8 @@
 package com.danperad.notes.ui
 
 import android.content.Context
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.ViewModel
-import com.danperad.notes.models.AppDataBase
+import com.danperad.notes.models.AppDatabase
 import com.danperad.notes.models.Note
 import com.danperad.notes.models.NoteRepository
 import kotlinx.coroutines.CoroutineScope
@@ -13,7 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class NotesViewModel(appContext: Context) : ViewModel() {
+class NotesViewModel(appContext: Context, coroutineScope: CoroutineScope) : ViewModel() {
     private val repository: NoteRepository
     private val _uiState = MutableStateFlow(NotesUiState(emptyList()))
     private val coroutineScope: CoroutineScope
@@ -23,15 +22,16 @@ class NotesViewModel(appContext: Context) : ViewModel() {
 
 
     init {
-        val db = AppDataBase.getDataBase(appContext).notesDao()
+        val db = AppDatabase.getDataBase(appContext).notesDao()
+        this.coroutineScope = coroutineScope
         repository = NoteRepository(db)
-        coroutineScope = rememberCoroutineScope()
         refreshNoteCardList()
+
     }
 
     private fun refreshNoteCardList() {
         coroutineScope.launch {
-            _uiState.update { NotesUiState(repository.getAllNotes()) }
+            _uiState.update {NotesUiState(repository.getAllNotes()) }
         }
     }
 
