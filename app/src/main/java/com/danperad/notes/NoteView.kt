@@ -1,8 +1,7 @@
 package com.danperad.notes
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -10,6 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.danperad.notes.models.Note
 import com.danperad.notes.ui.NotesViewModel
 
@@ -27,17 +27,17 @@ fun NoteView(notesViewModel: NotesViewModel, closeView: () -> Unit) {
             closeView()
         }, onCloseClick = { notesViewModel.closeCard(); closeView(); })
     }) {
-        Column {
+        Column(modifier = Modifier.fillMaxSize()) {
             TextField(value = header.value, onValueChange = { newText -> header.value = newText }, placeholder = {
                 Text(
                     stringResource(R.string.note_title_placeholder)
                 )
-            })
+            }, modifier = Modifier.fillMaxWidth())
             TextField(value = body.value, onValueChange = { newText -> body.value = newText }, placeholder = {
                 Text(
                     stringResource(R.string.note_body_placeholder)
                 )
-            })
+            }, modifier = Modifier.fillMaxWidth().fillMaxHeight())
         }
     }
 }
@@ -47,10 +47,10 @@ fun NoteTopBar(onSaveClick: () -> Unit, onCloseClick: () -> Unit) {
     TopAppBar {
         Text(stringResource(R.string.note_topbar_title))
         Spacer(modifier = Modifier.weight(1.0f))
-        Button(onClick = onSaveClick) {
+        Button(onClick = onSaveClick, colors = ButtonDefaults.outlinedButtonColors(), elevation = ButtonDefaults.elevation(0.dp, 0.dp)) {
             Text(stringResource(R.string.note_save))
         }
-        Button(onClick = onCloseClick) {
+        Button(onClick = onCloseClick, colors = ButtonDefaults.outlinedButtonColors(), elevation = ButtonDefaults.elevation(0.dp, 0.dp)) {
             Text(stringResource(R.string.note_close))
         }
     }

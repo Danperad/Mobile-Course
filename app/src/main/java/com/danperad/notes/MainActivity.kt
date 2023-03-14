@@ -5,8 +5,10 @@ import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -14,8 +16,10 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -96,17 +100,23 @@ fun MainViewNav(notesViewModel: NotesViewModel, navController: NavHostController
 
 @Composable
 fun NoteCardView(noteCard: NoteCard, onClick: () -> Unit, onSelectClick: () -> Unit, isSelected: Boolean = false) {
-    Box(modifier = Modifier.border(1.dp, Color.Black).clickable(onClick = onClick)) {
-        Column {
-            Row(modifier = Modifier.fillMaxWidth()) {
-                Text(noteCard.getHeader())
-                Spacer(modifier = Modifier.weight(1.0f))
-                IconButton(onClick = onSelectClick) {
-                    Icon(Icons.Default.Phone, contentDescription = null)
+    Box(modifier = Modifier.padding(5.dp)) {
+        Box(
+            modifier = Modifier.border(1.dp, Color.Black).background(if (isSelected) Color.DarkGray else Color.Transparent).padding(start = 10.dp, bottom = 5.dp)
+                .pointerInput(Unit){
+                    detectTapGestures(
+                        onTap = {onClick()},
+                        onLongPress = {onSelectClick()}
+                    )
                 }
+        ) {
+            Column {
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    Text(noteCard.getHeader(), fontSize = 22.sp, fontWeight = FontWeight.Bold)
+                }
+                Text(noteCard.getUpdated())
+                Text(noteCard.getBody(), fontSize = 20.sp)
             }
-            Text(noteCard.getUpdated())
-            Text(noteCard.getBody())
         }
     }
 }
@@ -151,7 +161,7 @@ fun TopAppBarMain(notesViewModel: NotesViewModel, onNavigateToAbout: () -> Unit)
 @Composable
 fun CreateButton(onNavigateToCreate: () -> Unit) {
     FloatingActionButton(onClick = onNavigateToCreate) {
-        Icon(Icons.Default.Create, contentDescription = stringResource(R.string.create_note_help))
+        Icon(Icons.Default.Add, contentDescription = stringResource(R.string.create_note_help))
     }
 }
 
