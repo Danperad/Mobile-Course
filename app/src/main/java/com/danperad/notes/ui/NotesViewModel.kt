@@ -5,52 +5,36 @@ import androidx.lifecycle.ViewModel
 import com.danperad.notes.models.AppDatabase
 import com.danperad.notes.models.Note
 import com.danperad.notes.models.NoteRepository
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 
-class NotesViewModel(appContext: Context, coroutineScope: CoroutineScope) : ViewModel() {
+class NotesViewModel(appContext: Context) : ViewModel() {
     private val repository: NoteRepository
     private val _uiState = MutableStateFlow(NotesUiState(emptyList()))
-    private val coroutineScope: CoroutineScope
     val uiState: StateFlow<NotesUiState> = _uiState.asStateFlow()
-    private val _isDarkTheme = MutableStateFlow(false)
-    val isDarkTheme: StateFlow<Boolean> = _isDarkTheme.asStateFlow()
 
 
     init {
         val db = AppDatabase.getDataBase(appContext).notesDao()
-        this.coroutineScope = coroutineScope
         repository = NoteRepository(db)
-        refreshNoteCardList()
-
     }
 
-    private fun refreshNoteCardList() {
-        coroutineScope.launch {
-            _uiState.update {NotesUiState(repository.getAllNotes()) }
-        }
+    fun refreshNoteCardList() {
+        _uiState.update { NotesUiState(repository.getAllNotes()) }
     }
 
     fun saveCard(note: Note) {
-        coroutineScope.launch {
-            if (note.id == 0)
-                repository.insertNotes(note)
-            else
-                repository.updateNotes(note)
-        }
+        if (note.id == 0)
+            repository.insertNotes(note)
+        else
+            repository.updateNotes(note)
         refreshNoteCardList()
     }
 
     fun openCard(noteCard: NoteCard?) {
         _uiState.update { NotesUiState(it.displayingNotesCards, emptyList(), noteCard) }
-    }
-
-    fun closeCard() {
-        refreshNoteCardList()
     }
 
     fun selectCard(noteCard: NoteCard) {
@@ -70,13 +54,7 @@ class NotesViewModel(appContext: Context, coroutineScope: CoroutineScope) : View
     }
 
     fun removeSelected() {
-        coroutineScope.launch {
-            _uiState.value.selectedNotesCards.forEach { repository.deleteNotes(it.getNote()) }
-        }
+        _uiState.value.selectedNotesCards.forEach { repository.deleteNotes(it.getNote()) }
         refreshNoteCardList()
-    }
-
-    fun changeTheme() {
-        _isDarkTheme.update { !it }
     }
 }

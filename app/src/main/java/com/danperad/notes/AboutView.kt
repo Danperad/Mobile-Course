@@ -1,9 +1,9 @@
 package com.danperad.notes
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -16,11 +16,10 @@ import androidx.compose.ui.unit.sp
 import com.danperad.notes.ui.theme.NotesTheme
 
 @Composable
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 fun AboutView(onExit: () -> Unit) {
     val scaffoldState = rememberScaffoldState()
     Scaffold(scaffoldState = scaffoldState, topBar = { AboutTopBar(onExit) }) {
-        Column {
+        Column(modifier = Modifier.padding(it)) {
             Text(stringResource(R.string.about_developer), fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
             Text(stringResource(R.string.about_copyright))
