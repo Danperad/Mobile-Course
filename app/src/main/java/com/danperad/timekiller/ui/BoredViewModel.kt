@@ -21,6 +21,10 @@ class BoredViewModel : ViewModel() {
 
     fun checkResult() = _uiState.value.activity !=null && _uiState.value.activity!!.isSuccess
 
+    fun cleanResult(){
+        _uiState.update { BoredUiState(it.activityFilter) }
+    }
+
     fun changeAccessibility(accessibility: Double) {
         _uiState.update {
             BoredUiState(

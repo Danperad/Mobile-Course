@@ -6,4 +6,5 @@
     <string name="search_participants">Число участников</string>
     <string name="search_price">Стоимость</string>
     <string name="result_label">Вам подойдет: </string>
+    <string name="result_preview">Занятие</string>
 </resources>
