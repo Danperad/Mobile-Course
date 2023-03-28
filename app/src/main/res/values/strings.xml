@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">My Application</string>
-    <string name="invalid_number_msg">Ошибка ввода</string>
-    <string name="placeholder">Введите число</string>
-    <string name="backspace_description">Описание</string>
+    <string name="app_name">Time Killer</string>
+    <string name="search_label">Параметры поиска</string>
+    <string name="search_type">Вид деятельности</string>
+    <string name="search_accessibility">Доступность</string>
+    <string name="search_participants">Число участников</string>
+    <string name="search_price">Стоимость</string>
+    <string name="result_label">Вам подойдет: </string>
 </resources>

@@ -1,4 +1,4 @@
-package com.danperad.empty
+package com.danperad.timekiller
 
 import org.junit.Test
 

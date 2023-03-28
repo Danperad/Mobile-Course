@@ -1,4 +1,4 @@
-package com.danperad.empty.ui.theme
+package com.danperad.timekiller.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

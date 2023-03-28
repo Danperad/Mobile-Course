@@ -1,4 +1,4 @@
-package com.danperad.empty.ui.theme
+package com.danperad.timekiller.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
